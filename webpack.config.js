@@ -1,18 +1,33 @@
 const webpack = require('webpack');
+const path = require('path');
+
+const ROOT_DIR = path.resolve(__dirname);
+
+const APP_DIR = path.resolve(ROOT_DIR, 'src');
+const PUBLIC_DIR = path.resolve(ROOT_DIR, 'public');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.jsx',
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader']
-      }
+      },
+      {
+        test: /\.(scss|sass)$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
     ]
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
+    modules: ['node_modules', APP_DIR],
   },
   output: {
     path: __dirname + '/dist',
