@@ -1,0 +1,29 @@
+@import 'styles/variables.scss';
+
+.body {
+  height: calc(100vh - #{$header-height});
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content-cont {
+    height: 80%;
+    width: 80%;
+    background-color: grey;
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+    display: flex;
+
+    .content {
+      width: 75%;
+      height: 100%;
+      background-image: url('assets/introduction.jpg');
+    }
+
+    .info {
+      width: 25%;
+      height: 100%;
+      background-color: #F8ECEC;
+      box-shadow: -5px 0 4px rgba(0,0,0,.25); 
+    }
+  }
+}

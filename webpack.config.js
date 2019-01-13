@@ -7,7 +7,7 @@ const APP_DIR = path.resolve(ROOT_DIR, 'src');
 const PUBLIC_DIR = path.resolve(ROOT_DIR, 'public');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: path.join(APP_DIR, 'index.jsx'),
   module: {
     rules: [
       {
@@ -22,6 +22,15 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {},
+          },
+        ],
       },
     ]
   },
