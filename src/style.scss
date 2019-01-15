@@ -7,20 +7,21 @@
   align-items: center;
 
   .content-cont {
-    height: 80%;
-    width: 80%;
-    background-color: grey;
+    height: $content-cont-height;
+    width: $content-cont-width;
     box-shadow: 0 4px 4px rgba(0,0,0,.25);
     display: flex;
+    overflow: hidden;
 
     .content {
       width: 75%;
       height: 100%;
-      background-image: url('assets/introduction.jpg');
+      position: relative;
     }
 
     .info {
-      width: 25%;
+      position: relative;
+      width: $info-width;
       height: 100%;
       background-color: #F8ECEC;
       box-shadow: -5px 0 4px rgba(0,0,0,.25); 
