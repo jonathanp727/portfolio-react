@@ -2,5 +2,22 @@
 
 .header {
   height: $header-height;
-  background-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 1.7em;
+    margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .nav {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    width: 7em;
+    margin-right: 30px;
+  }
 }
