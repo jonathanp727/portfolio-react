@@ -7,6 +7,7 @@ import IntroductionContent from './scenes/Introduction/content';
 import IntroductionInfo from './scenes/Introduction/info';
 import PortfolioContent from './scenes/Portfolio/content';
 import PortfolioInfo from './scenes/Portfolio/info';
+import HackillinoisContent from './scenes/HackIllinois/content';
 
 import './styles/reset.css';
 import './style.scss';
@@ -18,7 +19,15 @@ const route = (pathname) => {
       return IntroductionContent;
     case '/portfolio':
       return PortfolioContent;
+    case '/portfolio/hackillinois':
+      return HackillinoisContent;
   }
+}
+
+const order = {
+  '/': 0,
+  '/portfolio': 1,
+  '/portfolio/hackillinois': 2,
 }
 
 class App extends React.Component {
@@ -27,19 +36,15 @@ class App extends React.Component {
     const { pathname } = this.props.location;
     this.state = {
       prevRoute: pathname,
-      inTransition: false,
       curRoute: pathname,
-      pages: [
-        route(pathname),
-      ],
     };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.location.pathname !== prevState.curRoute) {
-      prevState.pages.push(route(nextProps.location.pathname))
       return {
         curRoute: nextProps.location.pathname,
+        prevRoute: prevState.curRoute,
       }
     }
     return null;
@@ -47,8 +52,33 @@ class App extends React.Component {
 
   render() {
     const { location } = this.props;
-    const { inTransition, pages } = this.state;
-    console.log(pages);
+    const { prevRoute, curRoute } = this.state;
+    const fromStyles = order[prevRoute] < order[curRoute] ?
+      {
+        opacity: .8,
+        left: '100%',
+      } :
+      {
+        opacity: 1,
+        left: '0%',
+      };
+    const enterStyles = order[prevRoute] < order[curRoute] ?
+      {
+        opacity: 1,
+        left: '0%',
+      } :
+      {
+        opacity: 1,
+        left: '0%',
+      };
+    const leaveStyles = order[prevRoute] < order[curRoute] ?
+      {
+        opacity: .9,
+      } :
+      {
+        opacity: .8,
+        left: '100%',
+      };
 
     return (
       <Route>
@@ -57,21 +87,18 @@ class App extends React.Component {
           <div className="body">
             <div className="content-cont">
               <div className="content">
-
                 <Transition
                   config={config.fast}
-                  items={pages}
-                  from={{ opacity: .8, left: '100%', backgroundColor: 'green', zIndex: 2 }}
-                  enter={{ opacity: 1, left: '0%' }}
-                  leave={{ opacity: .9 }}
-                  onRest={() => {
-                    if (pages.length > 1) {
-                      this.setState({ pages: [pages[1]] });
+                  items={location.pathname}
+                  from={fromStyles}
+                  enter={enterStyles}
+                  leave={leaveStyles}
+                >
+                  {
+                    pathname => style => {
+                      const Scene = route(pathname);
+                      return <Scene style={style} />
                     }
-                  }}>
-                  {(Item, state, index) => style => {
-                    return <Item style={style} />
-                  }
                   }
                 </Transition>
               </div>
