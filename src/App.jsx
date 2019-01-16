@@ -24,6 +24,17 @@ const route = (pathname) => {
   }
 }
 
+const routeInfo = (pathname) => {
+  switch(pathname) {
+    case '/':
+      return IntroductionInfo;
+    case '/portfolio':
+      return PortfolioInfo;
+    case '/portfolio/hackillinois':
+      return IntroductionInfo;
+  }
+}
+
 const order = {
   '/': 0,
   '/portfolio': 1,
@@ -80,6 +91,36 @@ class App extends React.Component {
         left: '100%',
       };
 
+    const fromStylesInfo = order[prevRoute] < order[curRoute] ?
+      {
+        opacity: 0,
+        transform: 'translate3d(0, 60%, 0)'
+      } :
+      {
+        opacity: 0,
+        transform: 'translate3d(0, -60%, 0)',
+      };
+
+    const enterStylesInfo = order[prevRoute] < order[curRoute] ?
+      {
+        opacity: 1,
+        transform: 'translate3d(0, 0, 0)'
+      } :
+      {
+        opacity: 1,
+        transform: 'translate3d(0, 0, 0)',
+      };
+
+    const leaveStylesInfo = order[prevRoute] < order[curRoute] ?
+      {
+        opacity: 0,
+        transform: 'translate3d(0, -60%, 0)'
+      } :
+      {
+        opacity: 0,
+        transform: 'translate3d(0, 60%, 0)',
+      };
+
     return (
       <Route>
         <div>
@@ -103,10 +144,20 @@ class App extends React.Component {
                 </Transition>
               </div>
               <div className="info">
-                <Switch>
-                  <Route exact path="/" component={IntroductionInfo} />
-                  <Route exact path="/portfolio" component={PortfolioInfo} />
-                </Switch>
+                <Transition
+                  config={config.fast}
+                  items={location.pathname}
+                  from={fromStylesInfo}
+                  enter={enterStylesInfo}
+                  leave={leaveStylesInfo}
+                >
+                  {
+                    pathname => style => {
+                      const Scene = routeInfo(pathname);
+                      return <Scene style={style} />
+                    }
+                  }
+                </Transition>
               </div>
             </div>
           </div>

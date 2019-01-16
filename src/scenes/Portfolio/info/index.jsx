@@ -1,8 +1,10 @@
 import React from 'react';
 
-const Info = () => (
-  <div>
-    <h1>Hi, I'm Jonathan</h1>
+import './style.scss';
+
+const Info = ({ style }) => (
+  <div className="portfolio-info" style={style}>
+    <h1>Hi, I'm not Jonathan</h1>
   </div>
 );
 
