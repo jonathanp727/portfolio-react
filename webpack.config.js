@@ -7,7 +7,7 @@ const APP_DIR = path.resolve(ROOT_DIR, 'src');
 const PUBLIC_DIR = path.resolve(ROOT_DIR, 'public');
 
 module.exports = {
-  entry: path.join(APP_DIR, 'index.jsx'),
+  entry: ['babel-polyfill', path.join(APP_DIR, 'index.jsx')],
   module: {
     rules: [
       {

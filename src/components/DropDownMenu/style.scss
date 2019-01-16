@@ -1,0 +1,19 @@
+.dropdown {
+  .menu {
+    position: absolute;
+    z-index: 101;
+
+    .menu-el {
+      position: relative;
+      display: block;
+      padding: 5px 10px;
+      border-bottom: 1px solid black;
+    }
+
+    .link {
+      text-decoration: none;
+      color: black;
+      font-size: 15px;
+    }
+  }
+}

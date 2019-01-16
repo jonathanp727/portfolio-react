@@ -94,11 +94,11 @@ class App extends React.Component {
     const fromStylesInfo = order[prevRoute] < order[curRoute] ?
       {
         opacity: 0,
-        transform: 'translate3d(0, 60%, 0)'
+        transform: 'translate3d(0, 30%, 0)'
       } :
       {
         opacity: 0,
-        transform: 'translate3d(0, -60%, 0)',
+        transform: 'translate3d(0, -30%, 0)',
       };
 
     const enterStylesInfo = order[prevRoute] < order[curRoute] ?
@@ -114,11 +114,11 @@ class App extends React.Component {
     const leaveStylesInfo = order[prevRoute] < order[curRoute] ?
       {
         opacity: 0,
-        transform: 'translate3d(0, -60%, 0)'
+        transform: 'translate3d(0, -30%, 0)'
       } :
       {
         opacity: 0,
-        transform: 'translate3d(0, 60%, 0)',
+        transform: 'translate3d(0, 30%, 0)',
       };
 
     return (
@@ -145,7 +145,7 @@ class App extends React.Component {
               </div>
               <div className="info">
                 <Transition
-                  config={config.fast}
+                  config={{ tension: 40, friction: 10 }}
                   items={location.pathname}
                   from={fromStylesInfo}
                   enter={enterStylesInfo}
