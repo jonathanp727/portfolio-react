@@ -7,38 +7,36 @@ import IntroductionContent from './scenes/Introduction/content';
 import IntroductionInfo from './scenes/Introduction/info';
 import PortfolioContent from './scenes/Portfolio/content';
 import PortfolioInfo from './scenes/Portfolio/info';
-import HackillinoisContent from './scenes/HackIllinois/content';
+import HackIllinoisContent from './scenes/HackIllinois/content';
+import HackIllinoisInfo from './scenes/HackIllinois/info';
 
 import './styles/reset.css';
 import './style.scss';
 
-// Takes location and return proper page component
-const route = (pathname) => {
+// Object containing all valid routes
+const routes = {
+  introduction: '/',
+  portfolio: '/portfolio',
+  hackIllinois: '/portfolio/hackillinois'
+};
+
+// Takes location and return proper page components
+const mapRouteToComponents = (pathname) => {
   switch (pathname) {
-    case '/':
-      return IntroductionContent;
-    case '/portfolio':
-      return PortfolioContent;
-    case '/portfolio/hackillinois':
-      return HackillinoisContent;
+    case routes.introduction:
+      return { Content: IntroductionContent, Info: IntroductionInfo };
+    case routes.portfolio:
+      return { Content: PortfolioContent, Info: PortfolioInfo };
+    case routes.hackIllinois:
+      return { Content: HackIllinoisContent, Info: HackIllinoisInfo };
   }
 }
 
-const routeInfo = (pathname) => {
-  switch(pathname) {
-    case '/':
-      return IntroductionInfo;
-    case '/portfolio':
-      return PortfolioInfo;
-    case '/portfolio/hackillinois':
-      return IntroductionInfo;
-  }
-}
-
+// Mapping of pages to indices to determine which animation to use
 const order = {
-  '/': 0,
-  '/portfolio': 1,
-  '/portfolio/hackillinois': 2,
+  [routes.introduction]: 0,
+  [routes.portfolio]: 1,
+  [routes.hackIllinois]: 2,
 }
 
 class App extends React.Component {
@@ -51,6 +49,7 @@ class App extends React.Component {
     };
   }
 
+  // Update state to keep track of the last route (to determine which transition animation to use)
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.location.pathname !== prevState.curRoute) {
       return {
@@ -64,7 +63,8 @@ class App extends React.Component {
   render() {
     const { location } = this.props;
     const { prevRoute, curRoute } = this.state;
-    const fromStyles = order[prevRoute] < order[curRoute] ?
+
+    const fromStylesContent = order[prevRoute] < order[curRoute] ?
       {
         opacity: .8,
         left: '100%',
@@ -73,7 +73,7 @@ class App extends React.Component {
         opacity: 1,
         left: '0%',
       };
-    const enterStyles = order[prevRoute] < order[curRoute] ?
+    const enterStylesContent = order[prevRoute] < order[curRoute] ?
       {
         opacity: 1,
         left: '0%',
@@ -82,7 +82,7 @@ class App extends React.Component {
         opacity: 1,
         left: '0%',
       };
-    const leaveStyles = order[prevRoute] < order[curRoute] ?
+    const leaveStylesContent = order[prevRoute] < order[curRoute] ?
       {
         opacity: .9,
       } :
@@ -131,14 +131,14 @@ class App extends React.Component {
                 <Transition
                   config={config.fast}
                   items={location.pathname}
-                  from={fromStyles}
-                  enter={enterStyles}
-                  leave={leaveStyles}
+                  from={fromStylesContent}
+                  enter={enterStylesContent}
+                  leave={leaveStylesContent}
                 >
                   {
                     pathname => style => {
-                      const Scene = route(pathname);
-                      return <Scene style={style} />
+                      const { Content } = mapRouteToComponents(pathname);
+                      return <Content style={style} />
                     }
                   }
                 </Transition>
@@ -153,8 +153,8 @@ class App extends React.Component {
                 >
                   {
                     pathname => style => {
-                      const Scene = routeInfo(pathname);
-                      return <Scene style={style} />
+                      const { Info } = mapRouteToComponents(pathname);
+                      return <Info style={style} />
                     }
                   }
                 </Transition>
