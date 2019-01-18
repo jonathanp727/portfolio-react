@@ -1,8 +1,9 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { Transition, config } from 'react-spring';
+import { Transition, config, animated } from 'react-spring';
 
 import Header from './components/Header';
+import Slide from './components/Slide';
 import IntroductionContent from './scenes/Introduction/content';
 import IntroductionInfo from './scenes/Introduction/info';
 import PortfolioContent from './scenes/Portfolio/content';
@@ -23,14 +24,13 @@ const routes = {
 
 // Takes location and return proper page components
 const mapRouteToComponents = (pathname) => {
-  console.log(pathname);
   switch (pathname) {
     case routes.introduction:
-      return { Content: IntroductionContent, Info: IntroductionInfo };
+      return { Content: IntroductionContent, Info: IntroductionInfo, image: 'introduction.jpg', prev: null, next: routes.portfolio };
     case routes.portfolio:
-      return { Content: PortfolioContent, Info: PortfolioInfo };
+      return { Content: PortfolioContent, Info: PortfolioInfo, image: 'portfolio.png', prev: routes.introduction, next: routes.hackIllinois };
     case routes.hackIllinois:
-      return { Content: HackIllinoisContent, Info: HackIllinoisInfo };
+      return { Content: HackIllinoisContent, Info: HackIllinoisInfo, image: 'hackillinois.jpg', prev: routes.portfolio, next: null };
     default:
       return { Content: () => <div>Not found</div>, Info: () => <div>I'm Still Jonathan</div>}
   }
@@ -142,8 +142,18 @@ class App extends React.Component {
                 >
                   {
                     pathname => style => {
-                      const { Content } = mapRouteToComponents(pathname);
-                      return <Content style={style} />
+                      const { Content, image, prev, next } = mapRouteToComponents(pathname);
+                      return (
+                        <Slide
+                          style={style}
+                          image={image}
+                          prev={prev}
+                          next={next}
+                          index={order[pathname]}
+                        >
+                          <Content />
+                        </Slide>
+                      );
                     }
                   }
                 </Transition>
@@ -160,9 +170,9 @@ class App extends React.Component {
                     pathname => style => {
                       const { Info } = mapRouteToComponents(pathname);
                       return (
-                        <div className='info-cont'>
+                        <animated.div className='info-cont'>
                           <Info style={style} />
-                        </div>
+                        </animated.div>
                       );
                     }
                   }
