@@ -26,7 +26,7 @@ class DropDownMenu extends React.Component {
   }
 
   render() {
-    const { buttonText, items, buttonClass, buttonLink } = this.props;
+    const { buttonText, items, buttonClass, buttonLink, links } = this.props;
     const { hovered, renderedItems } = this.state;  
     return (
       <div
@@ -48,7 +48,7 @@ class DropDownMenu extends React.Component {
             leave={{ opacity: 0, transform: 'translate3d(0, -70%, 0)' }}
           >
             {
-              item => style => {
+              (item, state, index) => style => {
                 return (
                   <animated.div style={style} className="menu-el">
                     <Link to={`/portfolio/${item}`} className="link">

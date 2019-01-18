@@ -11,17 +11,19 @@ import HackIllinoisContent from './scenes/HackIllinois/content';
 import HackIllinoisInfo from './scenes/HackIllinois/info';
 
 import './styles/reset.css';
+import './styles/base.scss';
 import './style.scss';
 
 // Object containing all valid routes
 const routes = {
   introduction: '/',
   portfolio: '/portfolio',
-  hackIllinois: '/portfolio/hackillinois'
+  hackIllinois: '/portfolio/Hack Illinois',
 };
 
 // Takes location and return proper page components
 const mapRouteToComponents = (pathname) => {
+  console.log(pathname);
   switch (pathname) {
     case routes.introduction:
       return { Content: IntroductionContent, Info: IntroductionInfo };
@@ -29,6 +31,8 @@ const mapRouteToComponents = (pathname) => {
       return { Content: PortfolioContent, Info: PortfolioInfo };
     case routes.hackIllinois:
       return { Content: HackIllinoisContent, Info: HackIllinoisInfo };
+    default:
+      return { Content: () => <div>Not found</div>, Info: () => <div>I'm Still Jonathan</div>}
   }
 }
 
@@ -37,6 +41,7 @@ const order = {
   [routes.introduction]: 0,
   [routes.portfolio]: 1,
   [routes.hackIllinois]: 2,
+  [routes.notFound]: 20,
 }
 
 class App extends React.Component {
@@ -94,11 +99,11 @@ class App extends React.Component {
     const fromStylesInfo = order[prevRoute] < order[curRoute] ?
       {
         opacity: 0,
-        transform: 'translate3d(0, 30%, 0)'
+        transform: 'translate3d(0, 60%, 0)'
       } :
       {
         opacity: 0,
-        transform: 'translate3d(0, -30%, 0)',
+        transform: 'translate3d(0, -60%, 0)',
       };
 
     const enterStylesInfo = order[prevRoute] < order[curRoute] ?
@@ -154,7 +159,11 @@ class App extends React.Component {
                   {
                     pathname => style => {
                       const { Info } = mapRouteToComponents(pathname);
-                      return <Info style={style} />
+                      return (
+                        <div className='info-cont'>
+                          <Info style={style} />
+                        </div>
+                      );
                     }
                   }
                 </Transition>

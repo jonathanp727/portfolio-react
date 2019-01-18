@@ -6,9 +6,8 @@ import DropDownMenu from 'components/DropDownMenu';
 import './style.scss';
 
 const portfolioMenuItems = [
-  'hackllinois',
-  'jishohistory',
-  'frank',
+  'Hack Illinois',
+  'Jisho History',
 ];
 
 const Header = () => (
@@ -22,7 +21,8 @@ const Header = () => (
         buttonText="Portfolio"
         buttonClass="link"
         buttonLink="/portfolio"
-        items={portfolioMenuItems} />
+        items={portfolioMenuItems}
+      />
     </div>
   </div>
 );

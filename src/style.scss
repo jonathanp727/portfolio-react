@@ -19,12 +19,24 @@
     }
 
     .info {
+      box-sizing: border-box;
       position: relative;
       width: $info-width;
       height: 100%;
       background-color: #F8ECEC;
       box-shadow: -5px 0 4px rgba(0,0,0,.25); 
       z-index: 100;
+      display: flex;
+
+      .info-cont {
+        position: absolute;
+        width: calc(100% - 2em);
+        left: 1em;
+        top: 1em;
+        height: calc(100% - 2em);
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

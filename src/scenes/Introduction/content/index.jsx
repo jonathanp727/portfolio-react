@@ -5,8 +5,11 @@ import './style.scss';
 
 const IntroductionContent = ({ style }) => (
   <div className="introduction-content" style={style}>
-    <h1>Hi, I'm Jonathan</h1>
-    <Link to='/portfolio'>-></Link>
+    <div className="text-cont">
+      <h1>Hi I'm</h1>
+      <span className="divider"/>
+      <h1 className="name">Jonathan Phipps</h1>
+    </div>
   </div>
 );
 

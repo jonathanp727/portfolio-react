@@ -8,4 +8,26 @@
   box-shadow: -5px 0 4px rgba(0,0,0,.25);
   z-index: 9;
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .text-cont {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .divider {
+      width: 100%;
+    }
+
+    .name {
+      color: #ECE7E7;
+      text-shadow: 0 4px 4px rgba(0,0,0,.25);
+      font-size: 6em;
+    }
+  }
 }
