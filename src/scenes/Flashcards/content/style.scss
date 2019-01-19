@@ -1,3 +1,4 @@
+@import '../../../styles/variables.scss';
 .flashcards-content {
   background-color: #e8d5b1;
   height: 100%;
@@ -6,12 +7,23 @@
   flex-direction: column;
 
   .title-cont {
+    @media only screen and (max-width: $mobile-max) {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
     h1 {
       color: #967f7d;
       text-shadow: 0 4px 4px rgba(0,0,0,0.25);
       font-size: 50px;
       margin-left: 20px;
       padding-top: 20px;
+
+      @media only screen and (max-width: $mobile-max) {
+        margin-left: 0;
+        font-size: 35px;
+      }
     }
   }
 
@@ -21,6 +33,10 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+
+    @media only screen and (max-width: $mobile-max) {
+      margin-top: 20px;
+    }
 
     .flashcard {
       margin: 0 20px;
@@ -33,6 +49,11 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
+
+      @media only screen and (max-width: $mobile-max) {
+        width: 170px;
+        height: 90px;
+      }
 
       span {
         font-size: 40px;

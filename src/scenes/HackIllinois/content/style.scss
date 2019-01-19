@@ -4,6 +4,7 @@ $sun-width: 375px;
 $mobile-sun-width: 280px;
 $cloud-width: 1300px;
 $sky-height: 520px;
+$mobile-sky-height: 350px;
 $wave-offset: 70px;
 
 @mixin fix-center($width) {
@@ -36,6 +37,10 @@ $wave-offset: 70px;
 
     .sun-wrapper {
       padding-top: 130px;
+      @media only screen and (max-width: $mobile-max) {
+        padding-top: 30px;
+      }
+
       .sun {
         height: $sun-width;
         width: $sun-width;
@@ -68,7 +73,7 @@ $wave-offset: 70px;
     }
 
     @media (max-width: $mobile-max) {
-      height: 445px;
+      height: $mobile-sky-height;
 
       .sun-wrapper {
         .sun {
@@ -88,28 +93,6 @@ $wave-offset: 70px;
       }
     }
   }
-
-  .rocks-top-wrapper {
-    position: relative;
-
-    .rocks-top {
-      position: absolute;
-      top: -130px;
-      left: 0;
-      width: 420px;
-
-      @media (max-width: $tablet-max) {
-        width: 260px;
-        top: -107px;
-      }
-
-      @media (max-width: $mobile-max) {
-        width: 180px;
-        top: -90px;
-      }
-    }
-  }
-
   .water {
     margin-top: -$wave-offset;
     padding-bottom: $wave-offset;

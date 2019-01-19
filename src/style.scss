@@ -12,10 +12,21 @@
     display: flex;
     overflow: hidden;
 
+    @media (max-width: $mobile-max) {
+      height: 100vh;
+      width: 100vw;
+      flex-wrap: wrap;
+    }
+
     .content {
       width: 75%;
       height: 100%;
       position: relative;
+
+      @media (max-width: $mobile-max) {
+        width: 100%;
+        height: 60%;
+      }
     }
 
     .info {
@@ -28,6 +39,12 @@
       z-index: 100;
       display: flex;
 
+      @media (max-width: $mobile-max) {
+        width: 100%;
+        height: 40%;
+        overflow: scroll;
+      }
+
       .info-cont {
         position: absolute;
         width: calc(100% - 2em);
@@ -36,6 +53,10 @@
         height: calc(100% - 2em);
         display: flex;
         align-items: center;
+
+        @media (max-width: $mobile-max) {
+          align-items: flex-start;
+        }
       }
     }
   }
