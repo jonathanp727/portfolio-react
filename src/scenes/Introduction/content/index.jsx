@@ -27,6 +27,8 @@ class IntroductionContent extends React.Component {
 
     this.state = {
       hiDone: false,
+      nameDone: false,
+      isChrome: !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime),
     };
   }
 
@@ -35,65 +37,83 @@ class IntroductionContent extends React.Component {
     if (nextProps.visited && !prevState.hiDone) {
       return {
         hiDone: true,
+        nameDone: true,
       }
     }
     return null;
   }
 
   render() {
-    const { hiDone } = this.state;
+    const { hiDone, isChrome, nameDone } = this.state;
     const { resting, onRest, visited } = this.props;
 
     return (
       <div className="introduction-content">
-          <div className="text-cont">
+        <div className="text-cont">
+          <Transition
+            native
+            config={config.fast}
+            from={{ opacity: 0, position: 'absolute', overflow: 'hidden', height: 0 }}
+            enter={[{ opacity: 1, height: 'auto' }]}
+            leave={{ height: 0 }}
+            immediate={visited}
+            onRest={() => this.setState({ hiDone: true })}
+          >
+            {
+              show => style => (
+                <animated.div className="hi" style={style}>Hi I'm</animated.div>
+              )
+            }
+          </Transition>
+          <span className="divider"/>
+          <div className="name-cont">
+            { hiDone &&
+              <Transition
+                native
+                items={name}
+                config={config.wobbly}
+                keys={item => item.key}
+                trail={20}
+                immediate={visited}
+                from={{ opacity: 0, transform: 'translate3d(-100%,0,0) scale(2)', textShadow: '0 6px 6px rgba(0,0,0,.5)' }}
+                enter={{ opacity: 1, transform: 'translate3d(0,0,0) scale(1)', textShadow: '0 4px 4px rgba(0,0,0,.25)' }}
+                leave={{ opacity: 1, transform: 'translate3d(100%,0,0)'}}
+                onRest={item => {
+                  if (item.key === 14) {
+                    onRest();
+                    this.setState({ nameDone: true });
+                  }
+                }}
+              >
+                {
+                  item => style => {
+                    if (item.letter === ' ') {
+                      return <animated.span style={{ marginLeft: '1em' }}></animated.span>
+                    }
+                    return <animated.h1 className="name" style={style}>{item.letter}</animated.h1>
+                  }
+                }
+              </Transition>
+            }
+          </div>
+          {
+            nameDone && !isChrome &&
             <Transition
               native
               config={config.fast}
               from={{ opacity: 0, position: 'absolute', overflow: 'hidden', height: 0 }}
               enter={[{ opacity: 1, height: 'auto' }]}
               leave={{ height: 0 }}
-              immediate={visited}
-              onRest={() => this.setState({ hiDone: true })}
             >
               {
                 show => style => (
-                  <animated.div className="hi" style={style}>Hi I'm</animated.div>
+                  <animated.div className="warning" style={style}>Non-chrome support undergoing development</animated.div>
                 )
               }
             </Transition>
-            <span className="divider"/>
-            <div className="name-cont">
-              { hiDone &&
-                <Transition
-                  native
-                  items={name}
-                  config={config.wobbly}
-                  keys={item => item.key}
-                  trail={20}
-                  immediate={visited}
-                  from={{ opacity: 0, transform: 'translate3d(-100%,0,0) scale(2)', textShadow: '0 6px 6px rgba(0,0,0,.5)' }}
-                  enter={{ opacity: 1, transform: 'translate3d(0,0,0) scale(1)', textShadow: '0 4px 4px rgba(0,0,0,.25)' }}
-                  leave={{ opacity: 1, transform: 'translate3d(100%,0,0)'}}
-                  onRest={item => {
-                    if (item.key === 14) {
-                      onRest();
-                    }
-                  }}
-                >
-                  {
-                    item => style => {
-                      if (item.letter === ' ') {
-                        return <animated.span style={{ marginLeft: '1em' }}></animated.span>
-                      }
-                      return <animated.h1 className="name" style={style}>{item.letter}</animated.h1>
-                    }
-                  }
-                </Transition>
-              }
-            </div>
-          </div>
+          }
         </div>
+      </div>
     );
   }
 }
