@@ -5,8 +5,7 @@ import './style.scss';
 
 const PortfolioContent = ({ style }) => (
   <div className="portfolio-content" style={style}>
-    <h1>Hi, I'm Jonathan</h1>
-    <Link to="/portfolio/Hack Illinois" >Back</Link>
+    <h1 className="title">Portfolio</h1>
   </div>
 );
 

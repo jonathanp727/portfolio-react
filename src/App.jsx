@@ -10,6 +10,8 @@ import PortfolioContent from './scenes/Portfolio/content';
 import PortfolioInfo from './scenes/Portfolio/info';
 import HackIllinoisContent from './scenes/HackIllinois/content';
 import HackIllinoisInfo from './scenes/HackIllinois/info';
+import JishoHistoryContent from './scenes/JishoHistory/content';
+import JishoHistoryInfo from './scenes/JishoHistory/info';
 
 import './styles/reset.css';
 import './styles/base.scss';
@@ -20,6 +22,7 @@ const routes = {
   introduction: '/',
   portfolio: '/portfolio',
   hackIllinois: '/portfolio/Hack Illinois',
+  jishoHistory: '/portfolio/Jisho History',
 };
 
 // Takes location and return proper page components
@@ -30,7 +33,9 @@ const mapRouteToComponents = (pathname) => {
     case routes.portfolio:
       return { Content: PortfolioContent, Info: PortfolioInfo, image: 'portfolio.png', prev: routes.introduction, next: routes.hackIllinois };
     case routes.hackIllinois:
-      return { Content: HackIllinoisContent, Info: HackIllinoisInfo, image: 'hackillinois.jpg', prev: routes.portfolio, next: null };
+      return { Content: HackIllinoisContent, Info: HackIllinoisInfo, image: null, prev: routes.portfolio, next: routes.jishoHistory };
+    case routes.jishoHistory:
+      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: 'jishohistory.png', prev: routes.hackIllinois, next: null };
     default:
       return { Content: () => <div>Not found</div>, Info: () => <div>I'm Still Jonathan</div>}
   }
@@ -41,6 +46,7 @@ const order = {
   [routes.introduction]: 0,
   [routes.portfolio]: 1,
   [routes.hackIllinois]: 2,
+  [routes.jishoHistory]: 3,
   [routes.notFound]: 20,
 }
 
@@ -51,6 +57,7 @@ class App extends React.Component {
     this.state = {
       prevRoute: pathname,
       curRoute: pathname,
+      visited: {}
     };
   }
 
@@ -67,7 +74,7 @@ class App extends React.Component {
 
   render() {
     const { location } = this.props;
-    const { prevRoute, curRoute } = this.state;
+    const { prevRoute, curRoute, visited } = this.state;
 
     const fromStylesContent = order[prevRoute] < order[curRoute] ?
       {
@@ -134,11 +141,16 @@ class App extends React.Component {
             <div className="content-cont">
               <div className="content">
                 <Transition
+                  native
                   config={config.fast}
                   items={location.pathname}
                   from={fromStylesContent}
                   enter={enterStylesContent}
                   leave={leaveStylesContent}
+                  onRest={pathname => {
+                    this.setState({ visited: { ...this.state.visited, [pathname]: true }});
+                  }}
+                  onDestroyed={pathname => this.setState({ })}
                 >
                   {
                     pathname => style => {
@@ -151,7 +163,7 @@ class App extends React.Component {
                           next={next}
                           index={order[pathname]}
                         >
-                          <Content />
+                          <Content resting={curRoute && visited[pathname]}/>
                         </Slide>
                       );
                     }
@@ -160,6 +172,7 @@ class App extends React.Component {
               </div>
               <div className="info">
                 <Transition
+                  native
                   config={{ tension: 40, friction: 10 }}
                   items={location.pathname}
                   from={fromStylesInfo}
@@ -170,9 +183,11 @@ class App extends React.Component {
                     pathname => style => {
                       const { Info } = mapRouteToComponents(pathname);
                       return (
-                        <animated.div className='info-cont'>
-                          <Info style={style} />
-                        </animated.div>
+                        <div className='info-cont'>
+                          <animated.div style={style}>
+                            <Info style={style} />
+                          </animated.div>
+                        </div>
                       );
                     }
                   }

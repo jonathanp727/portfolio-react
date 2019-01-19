@@ -21,7 +21,7 @@ const Slide = ({ style, image, index, prev, next, children }) => (
     <div className="page-content">
       { children }
     </div>
-    <div className="arrow-cont">
+    <div className="arrow-cont right-cont">
       { next &&
         <Link to={next}>
           <img

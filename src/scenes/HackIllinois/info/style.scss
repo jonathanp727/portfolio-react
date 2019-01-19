@@ -1,0 +1,38 @@
+.hackillinois-info {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .desc, .desc-2 {
+    line-height: 1.2em;
+  }
+
+  .desc-2 {
+    margin-top: 1em;
+    margin-bottom: 2em;
+  }
+  a {
+    position: absolute;
+    text-decoration: none;
+    width: 100%;
+    bottom: 0;
+  }
+
+  .link {
+    border: 3px solid #ada1a1;
+    border-radius: 6px;
+    padding: 3px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    color: black;
+    transition: border .4s ease-in-out;
+  }
+
+  .link:hover {
+    border: 3px solid #635757;
+  }
+}
