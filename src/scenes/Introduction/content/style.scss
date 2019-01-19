@@ -8,9 +8,9 @@
   align-items: center;
 
   .hi {
-    position: absolute;
-    padding-bottom: 200px;
+    bottom: 350px;
     font-size: 2em;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
   }
 
   .text-cont {
@@ -26,8 +26,7 @@
     }
 
     .name {
-      color: #ECE7E7;
-      text-shadow: 0 4px 4px rgba(0,0,0,.25);
+      color: #380906;
       font-size: 6em;
       display: inline-block;
     }

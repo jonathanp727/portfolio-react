@@ -13,7 +13,7 @@ const JishoHistoryInfo = ({ style }) => (
       retension.
     </p>
     <p className="desc desc-2">
-      Using tesseract OCR and a japanese tokenizer, users can now
+      Using tesseract OCR and a japanese tokenizer, users can also
       send in photos of Japanese text and automatically add unknown
       words without a third party website.  
     </p>

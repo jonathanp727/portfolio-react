@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { Transition, config, animated } from 'react-spring';
 
 import Header from './components/Header';
@@ -14,6 +14,7 @@ import JishoHistoryContent from './scenes/JishoHistory/content';
 import JishoHistoryInfo from './scenes/JishoHistory/info';
 import FlashcardsContent from './scenes/Flashcards/content';
 import FlashcardsInfo from './scenes/Flashcards/info';
+import NotFound from './scenes/Notfound';
 
 import './styles/reset.css';
 import './styles/base.scss';
@@ -26,13 +27,16 @@ const routes = {
   hackIllinois: '/portfolio/Hack Illinois',
   jishoHistory: '/portfolio/Jisho History',
   flashcards: '/portfolio/Flashcards',
+  notFound: '/404',
 };
 
 // Takes location and return proper page components
 const mapRouteToComponents = (pathname) => {
   switch (pathname) {
     case routes.introduction:
-      return { Content: IntroductionContent, Info: IntroductionInfo, image: null, prev: null, next: routes.portfolio };
+      return { Content: IntroductionContent, Info: IntroductionInfo, image: 'introduction.jpg', prev: null, next: routes.portfolio };
+    case routes.notFound:
+      return { Content: NotFound, Info: () => <div />, image: null, prev: null, next: routes.introduction };
     case routes.portfolio:
       return { Content: PortfolioContent, Info: PortfolioInfo, image: 'portfolio.png', prev: routes.introduction, next: routes.hackIllinois };
     case routes.hackIllinois:
@@ -42,7 +46,7 @@ const mapRouteToComponents = (pathname) => {
     case routes.flashcards:
       return { Content: FlashcardsContent, Info: FlashcardsInfo, image: null, prev: routes.jishoHistory, next: null}
     default:
-      return { Content: () => <div>Not found</div>, Info: () => <div>I'm Still Jonathan</div>}
+      return null;
   }
 }
 
@@ -53,7 +57,7 @@ const order = {
   [routes.hackIllinois]: 2,
   [routes.jishoHistory]: 3,
   [routes.flashcards]: 4,
-  [routes.notFound]: 20,
+  [routes.notFound]: 5,
 }
 
 class App extends React.Component {
@@ -63,8 +67,12 @@ class App extends React.Component {
     this.state = {
       prevRoute: pathname,
       curRoute: pathname,
-      visited: {}
+      visited: {},
+      infoVisited: {},
+      introAnimationFinished: false,
     };
+
+    this.onIntroRest = this.onIntroRest.bind(this);
   }
 
   // Update state to keep track of the last route (to determine which transition animation to use)
@@ -78,9 +86,19 @@ class App extends React.Component {
     return null;
   }
 
+  // Callback called by intro content when animation is finished in order to render info later on
+  onIntroRest() {
+    this.setState({ introAnimationFinished: true });
+  }
+
   render() {
     const { location } = this.props;
-    const { prevRoute, curRoute, visited } = this.state;
+    const { prevRoute, curRoute, visited, infoVisited, introAnimationFinished } = this.state;
+
+    // Reroute to 404 if page doesn't exist
+    if (order[location.pathname] === undefined) {
+      return <Redirect to={routes.notFound} />
+    }
 
     const fromStylesContent = order[prevRoute] < order[curRoute] ?
       {
@@ -169,7 +187,10 @@ class App extends React.Component {
                           next={next}
                           index={order[pathname]}
                         >
-                          <Content resting={curRoute && visited[pathname]}/>
+                          { pathname !== routes.introduction ?
+                            <Content resting={curRoute && visited[pathname]}/> :
+                            <Content resting={curRoute && visited[pathname]} onRest={this.onIntroRest} visited={introAnimationFinished}/> 
+                          }
                         </Slide>
                       );
                     }
@@ -177,27 +198,32 @@ class App extends React.Component {
                 </Transition>
               </div>
               <div className="info">
-                <Transition
-                  native
-                  config={{ tension: 40, friction: 10 }}
-                  items={location.pathname}
-                  from={fromStylesInfo}
-                  enter={enterStylesInfo}
-                  leave={leaveStylesInfo}
-                >
-                  {
-                    pathname => style => {
-                      const { Info } = mapRouteToComponents(pathname);
-                      return (
-                        <div className='info-cont'>
-                          <animated.div style={style}>
-                            <Info style={style} resting={curRoute && visited[pathname]}/>
-                          </animated.div>
-                        </div>
-                      );
+                { (location.pathname !== routes.introduction || introAnimationFinished) &&
+                  <Transition
+                    native
+                    config={{ tension: 40, friction: 10 }}
+                    items={location.pathname}
+                    from={fromStylesInfo}
+                    enter={enterStylesInfo}
+                    leave={leaveStylesInfo}
+                    onRest={pathname => {
+                      this.setState({ infoVisited: { ...this.state.infoVisited, [pathname]: true }});
+                    }}
+                  >
+                    {
+                      pathname => style => {
+                        const { Info } = mapRouteToComponents(pathname);
+                        return (
+                          <div className='info-cont'>
+                            <animated.div style={style}>
+                              <Info style={style} resting={curRoute && infoVisited[pathname]}/>
+                            </animated.div>
+                          </div>
+                        );
+                      }
                     }
-                  }
-                </Transition>
+                  </Transition>
+                }
               </div>
             </div>
           </div>

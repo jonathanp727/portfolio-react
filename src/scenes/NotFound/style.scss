@@ -1,0 +1,12 @@
+.notfound-page {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  h1 {
+    font-size: 4em;
+    text-shadow: 0 4px 4px rgba(0,0,0,.25);
+    margin-left: 40px;
+  }
+}

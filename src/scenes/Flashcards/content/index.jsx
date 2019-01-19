@@ -53,7 +53,7 @@ class FlashcardsContent extends React.Component {
                 (card, state, index) => style => {
                   return (
                     <animated.div className="flashcard" style={style} onClick={() => this.handleToggle(index)}>
-                      <span>{toggle[index] ? card.front : card.back}</span>
+                      <span>{toggle[index] ? card.back : card.front}</span>
                     </animated.div>
                   )
                 }

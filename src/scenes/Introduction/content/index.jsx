@@ -30,26 +30,38 @@ class IntroductionContent extends React.Component {
     };
   }
 
+  // Update state to keep track of the last route (to determine which transition animation to use)
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.visited && !prevState.hiDone) {
+      return {
+        hiDone: true,
+      }
+    }
+    return null;
+  }
+
   render() {
     const { hiDone } = this.state;
-    const { resting } = this.props;
+    const { resting, onRest, visited } = this.props;
 
     return (
       <div className="introduction-content">
           <div className="text-cont">
-            <Spring
+            <Transition
               native
-              config={{ tension: 120 }}
-              from={{ opacity: 0 }}
-              to={{ opacity: 1 }}
+              config={config.fast}
+              from={{ opacity: 0, position: 'absolute', overflow: 'hidden', height: 0 }}
+              enter={[{ opacity: 1, height: 'auto' }]}
+              leave={{ height: 0 }}
+              immediate={visited}
               onRest={() => this.setState({ hiDone: true })}
             >
-            {
-              style => (
-                <animated.h1 className="hi" style={style}>Hi I'm</animated.h1>
-              )
-            }
-            </Spring>
+              {
+                show => style => (
+                  <animated.div className="hi" style={style}>Hi I'm</animated.div>
+                )
+              }
+            </Transition>
             <span className="divider"/>
             <div className="name-cont">
               { hiDone &&
@@ -59,9 +71,15 @@ class IntroductionContent extends React.Component {
                   config={config.wobbly}
                   keys={item => item.key}
                   trail={20}
-                  from={{ opacity: 0, transform: 'translate3d(-100%,0,0) scale(2)' }}
-                  enter={[{ opacity: 1, transform: 'translate3d(0,0,0) scale(0)' }, { transform: 'translate3d(0,0,0) scale(1)'}]}
-                  leave={{ opacity: 0, transform: 'translate3d(100%,0,0)'}}
+                  immediate={visited}
+                  from={{ opacity: 0, transform: 'translate3d(-100%,0,0) scale(2)', textShadow: '0 6px 6px rgba(0,0,0,.5)' }}
+                  enter={{ opacity: 1, transform: 'translate3d(0,0,0) scale(1)', textShadow: '0 4px 4px rgba(0,0,0,.25)' }}
+                  leave={{ opacity: 1, transform: 'translate3d(100%,0,0)'}}
+                  onRest={item => {
+                    if (item.key === 14) {
+                      onRest();
+                    }
+                  }}
                 >
                   {
                     item => style => {

@@ -40,7 +40,7 @@ class DropDownMenu extends React.Component {
             reset
             unique
             config={config.fast}
-            trail={200}
+            trail={130}
             items={renderedItems}
             key={item => item.key}
             from={{ opacity: 0, transform: 'translate3d(0, -70%, 0)' }}
