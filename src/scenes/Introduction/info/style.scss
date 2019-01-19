@@ -23,6 +23,7 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+      width: 100%;
     }
 
     .proficiency-label {
@@ -49,30 +50,6 @@
       fill: #a6bdc1;
       fill-opacity: 1;
       height: 100%;  
-    }
-
-    #fill-rect-1 {
-      width: 75%;
-    }
-
-    #fill-rect-2 {
-      width: 85%;
-    }
-
-    #fill-rect-3 {
-      width: 65%;
-    }
-
-    #fill-rect-4 {
-      width: 35%;
-    }
-
-    #fill-rect-5 {
-      width: 75%;
-    }
-
-    #fill-rect-6 {
-      width: 65%;
     }
   }
 }

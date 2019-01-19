@@ -12,6 +12,8 @@ import HackIllinoisContent from './scenes/HackIllinois/content';
 import HackIllinoisInfo from './scenes/HackIllinois/info';
 import JishoHistoryContent from './scenes/JishoHistory/content';
 import JishoHistoryInfo from './scenes/JishoHistory/info';
+import FlashcardsContent from './scenes/Flashcards/content';
+import FlashcardsInfo from './scenes/Flashcards/info';
 
 import './styles/reset.css';
 import './styles/base.scss';
@@ -23,19 +25,22 @@ const routes = {
   portfolio: '/portfolio',
   hackIllinois: '/portfolio/Hack Illinois',
   jishoHistory: '/portfolio/Jisho History',
+  flashcards: '/portfolio/Flashcards',
 };
 
 // Takes location and return proper page components
 const mapRouteToComponents = (pathname) => {
   switch (pathname) {
     case routes.introduction:
-      return { Content: IntroductionContent, Info: IntroductionInfo, image: 'introduction.jpg', prev: null, next: routes.portfolio };
+      return { Content: IntroductionContent, Info: IntroductionInfo, image: null, prev: null, next: routes.portfolio };
     case routes.portfolio:
       return { Content: PortfolioContent, Info: PortfolioInfo, image: 'portfolio.png', prev: routes.introduction, next: routes.hackIllinois };
     case routes.hackIllinois:
       return { Content: HackIllinoisContent, Info: HackIllinoisInfo, image: null, prev: routes.portfolio, next: routes.jishoHistory };
     case routes.jishoHistory:
-      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: 'jishohistory.png', prev: routes.hackIllinois, next: null };
+      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: 'jishohistory.jpg', prev: routes.hackIllinois, next: routes.flashcards };
+    case routes.flashcards:
+      return { Content: FlashcardsContent, Info: FlashcardsInfo, image: null, prev: routes.jishoHistory, next: null}
     default:
       return { Content: () => <div>Not found</div>, Info: () => <div>I'm Still Jonathan</div>}
   }
@@ -47,6 +52,7 @@ const order = {
   [routes.portfolio]: 1,
   [routes.hackIllinois]: 2,
   [routes.jishoHistory]: 3,
+  [routes.flashcards]: 4,
   [routes.notFound]: 20,
 }
 
@@ -185,7 +191,7 @@ class App extends React.Component {
                       return (
                         <div className='info-cont'>
                           <animated.div style={style}>
-                            <Info style={style} />
+                            <Info style={style} resting={curRoute && visited[pathname]}/>
                           </animated.div>
                         </div>
                       );

@@ -1,8 +1,9 @@
 import React from 'react';
+import { Spring } from 'react-spring';
 
 import './style.scss';
 
-const Info = ({ style }) => (
+const Info = ({ style, resting }) => (
   <div className="introduction-info" style={style}>
     <div className="intro">
       <p>
@@ -21,42 +22,96 @@ const Info = ({ style }) => (
           <span className="proficiency-label">React</span>
           <svg>
             <rect className="border-rect"></rect>
-            <rect className="fill-rect" id="fill-rect-1"></rect>
+            { resting &&
+              <Spring
+                from={{ width: '0%' }}
+                to={{ width: '75%' }}>
+                { 
+                  style =>
+                    <rect className="fill-rect" style={style}></rect>
+                }
+              </Spring>
+            }
           </svg>
         </li>
         <li>
           <span className="proficiency-label">Node.js</span>
           <svg>
             <rect className="border-rect"></rect>
-            <rect className="fill-rect" id="fill-rect-2"></rect>
+            { resting &&
+              <Spring
+                from={{ width: '0%' }}
+                to={{ width: '85%' }}>
+                { 
+                  style =>
+                    <rect className="fill-rect" style={style}></rect>
+                }
+              </Spring>
+            }
           </svg>
         </li>
         <li>
           <span className="proficiency-label">HTML/CSS</span>
           <svg>
             <rect className="border-rect"></rect>
-            <rect className="fill-rect" id="fill-rect-3"></rect>
+            { resting &&
+              <Spring
+                from={{ width: '0%' }}
+                to={{ width: '65%' }}>
+                { 
+                  style =>
+                    <rect className="fill-rect" style={style}></rect>
+                }
+              </Spring>
+            }
           </svg>
         </li>
         <li>
           <span className="proficiency-label">jQuery</span>
           <svg>
             <rect className="border-rect"></rect>
-            <rect className="fill-rect" id="fill-rect-4"></rect>
+            { resting &&
+              <Spring
+                from={{ width: '0%' }}
+                to={{ width: '35%' }}>
+                { 
+                  style =>
+                    <rect className="fill-rect" style={style}></rect>
+                }
+              </Spring>
+            }
           </svg>
         </li>
         <li>
           <span className="proficiency-label">Mongodb</span>
           <svg>
             <rect className="border-rect"></rect>
-            <rect className="fill-rect" id="fill-rect-5"></rect>
+            { resting &&
+              <Spring
+                from={{ width: '0%' }}
+                to={{ width: '75%' }}>
+                { 
+                  style =>
+                    <rect className="fill-rect" style={style}></rect>
+                }
+              </Spring>
+            }
           </svg>
         </li>
         <li>
           <span className="proficiency-label">MySql</span>
           <svg>
             <rect className="border-rect"></rect>
-            <rect className="fill-rect" id="fill-rect-6"></rect>
+            { resting &&
+              <Spring
+                from={{ width: '0%' }}
+                to={{ width: '65%' }}>
+                { 
+                  style =>
+                    <rect className="fill-rect" style={style}></rect>
+                }
+              </Spring>
+            }
           </svg>
         </li>
       </ul>

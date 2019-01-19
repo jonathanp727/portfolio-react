@@ -8,6 +8,7 @@ import './style.scss';
 const portfolioMenuItems = [
   'Hack Illinois',
   'Jisho History',
+  'Flashcards',
 ];
 
 const Header = () => (

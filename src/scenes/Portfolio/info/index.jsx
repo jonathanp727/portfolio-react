@@ -4,7 +4,10 @@ import './style.scss';
 
 const Info = ({ style }) => (
   <div className="portfolio-info" style={style}>
-    <h1>Hi, I'm not Jonathan</h1>
+    <p>
+      My most recent projects.  Unless otherwise stated, they were
+      done on my own and outside of class.
+    </p>
   </div>
 );
 

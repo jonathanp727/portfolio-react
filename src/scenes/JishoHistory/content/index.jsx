@@ -97,9 +97,9 @@ class JishoHistoryContent extends React.Component {
                   items={words}
                   keys={word => word.text}
                   trail={200}
-                  from={{ opacity: 0, transform: 'translate3d(0, 200%,0)' }}
+                  from={{ opacity: 0, transform: 'translate3d(0, 50%,0)' }}
                   enter={{ opacity: 1, transform: 'translate3d(0,0,0)' }}
-                  leave={{ opacity: 0, transform: 'translate3d(0,200%,0)' }}
+                  leave={{ opacity: 0, transform: 'translate3d(0,100%,0)' }}
                 >
                   {
                     item => style => (
