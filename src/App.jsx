@@ -57,7 +57,7 @@ const order = {
   [routes.hackIllinois]: 2,
   [routes.jishoHistory]: 3,
   [routes.flashcards]: 4,
-  [routes.notFound]: 5,
+  [routes.notFound]: -1,
 }
 
 class App extends React.Component {

@@ -8,13 +8,12 @@
   align-items: center;
 
   .hi {
-    bottom: 350px;
+    bottom: 64%;
     font-size: 2em;
     text-shadow: 0 4px 4px rgba(0,0,0,0.25);
 
     @media only screen and (max-width: $mobile-max) {
       font-size: 1em;
-      bottom: 64%;
     }
   }
 

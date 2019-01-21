@@ -57,6 +57,12 @@
         @media (max-width: $mobile-max) {
           align-items: flex-start;
         }
+        @media (min-width: $large-desktop-min) {
+          left: 2em;
+          top: 2em;
+          width: calc(100% - 4em);
+          height: calc(100% - 4em);
+        }
       }
     }
   }
