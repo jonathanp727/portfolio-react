@@ -3,6 +3,7 @@ const path = require('path');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 
+const BUILD_DIR = path.resolve(ROOT_DIR, 'dist');
 const APP_DIR = path.resolve(ROOT_DIR, 'src');
 const PUBLIC_DIR = path.resolve(ROOT_DIR, 'public');
 
@@ -39,7 +40,7 @@ module.exports = {
     modules: ['node_modules', APP_DIR],
   },
   output: {
-    path: __dirname + '/dist',
+    path: BUILD_DIR,
     publicPath: '/',
     filename: 'bundle.js'
   },
