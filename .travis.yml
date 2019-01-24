@@ -11,6 +11,5 @@ deploy:
   bucket: jonathanmp.me
   region: us-east-2
   local-dir: build
-  acl: ''
   on:
     repo: jonathanp727/portfolio-react
