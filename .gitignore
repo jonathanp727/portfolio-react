@@ -68,6 +68,7 @@ typings/
 
 # Webpack Build Output
 build/
+dist/
 
 # Editor Specific
 *.swp
