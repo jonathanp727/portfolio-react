@@ -3,6 +3,8 @@ node_js:
 - node
 git:
   depth: false
+script:
+- npm run build
 deploy:
   provider: s3
   access_key_id: AKIAIJN5QWTMNHX5BYJQ
