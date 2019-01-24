@@ -16,6 +16,10 @@ import FlashcardsContent from './scenes/Flashcards/content';
 import FlashcardsInfo from './scenes/Flashcards/info';
 import NotFound from './scenes/Notfound';
 
+import IntroductionBackground from './assets/backgrounds/introduction.jpg';
+import JishoHistoryBackground from './assets/backgrounds/jishohistory.jpg';
+import PortfolioBackground from './assets/backgrounds/portfolio.png';
+
 import './styles/reset.css';
 import './styles/base.scss';
 import './style.scss';
@@ -34,15 +38,15 @@ const routes = {
 const mapRouteToComponents = (pathname) => {
   switch (pathname) {
     case routes.introduction:
-      return { Content: IntroductionContent, Info: IntroductionInfo, image: 'introduction.jpg', prev: null, next: routes.portfolio };
+      return { Content: IntroductionContent, Info: IntroductionInfo, image: IntroductionBackground, prev: null, next: routes.portfolio };
     case routes.notFound:
       return { Content: NotFound, Info: () => <div />, image: null, prev: null, next: routes.introduction };
     case routes.portfolio:
-      return { Content: PortfolioContent, Info: PortfolioInfo, image: 'portfolio.png', prev: routes.introduction, next: routes.hackIllinois };
+      return { Content: PortfolioContent, Info: PortfolioInfo, image: PortfolioBackground, prev: routes.introduction, next: routes.hackIllinois };
     case routes.hackIllinois:
       return { Content: HackIllinoisContent, Info: HackIllinoisInfo, image: null, prev: routes.portfolio, next: routes.jishoHistory };
     case routes.jishoHistory:
-      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: 'jishohistory.jpg', prev: routes.hackIllinois, next: routes.flashcards };
+      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: JishoHistoryBackground, prev: routes.hackIllinois, next: routes.flashcards };
     case routes.flashcards:
       return { Content: FlashcardsContent, Info: FlashcardsInfo, image: null, prev: routes.jishoHistory, next: null}
     default:

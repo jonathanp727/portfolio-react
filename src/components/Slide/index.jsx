@@ -6,7 +6,7 @@ import transitionArrow from 'assets/right-arrow.svg';
 import './style.scss';
 
 const Slide = ({ style, image, index, prev, next, children }) => (
-  <animated.div className="slide" style={{ ...style, backgroundImage: `url(/assets/backgrounds/${image})`, zIndex: 10 + index }}>
+  <animated.div className="slide" style={{ ...style, backgroundImage: `url(${image})`, zIndex: 10 + index }}>
     <div className="arrow-cont">
       { prev  &&
         <Link to={prev}>
