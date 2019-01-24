@@ -1,1 +1,11 @@
 language: node_js
+deploy:
+  provider: s3
+  access_key_id: AKIAIJN5QWTMNHX5BYJQ
+  secret_access_key:
+    secure: jbnEi1QwAb6KFtlCm4e+OvOHYGffsJjDHOvG6R8vOnwq0lWIKdksnb6XAa9BOfQHZg8oY1Bm+VAOZLOeOMUZygFGQGov0mY5p2X5x4BjgG5D3yJseh/u5XhLQMdNUdXbhjYYxn68Ymja8uc6Om9BMQFWiZm99Rj9qmPk/iePQgv9zjBA4oUw0IfwoQR+9Wu31GVaKI1CynJPFHDzaGJmHQAe5gxNMQUk/0PZ/N7d+s1/mf61EYxFnHLt5i989IWRuDv0z/+QZPqAH+RFs9C6VgBdGp4Ou0Y5SBGRkxRwt8n6opNkPNgc04kk4dI7o4939P4flUT7OXJP39pxg2ygv/Q5JL9LbI+gkRTaRr6E6QO0yv8AS+xEnY7ckcExDVYYhcXz/paGjVEEsoKgq3DIBU3DgFIABOuTV7hCyKJCMfA3nRHbWOCo//bZH8HvRMUMgdehlWGt6BxyBEmdSTS5M987uv2+CjdpolvUvf2l/vhmmfanUk6ZxWO0jmVNjxf40LL5WmLyrSd0wj6lUDBLI5C7b6sriiDcA8n0HqxAg0hJaAqCJFxc2zSqbkPTZAu6T14HRzEwIgLSH/DySkszfs2ur4bPIWcd5x5pYG7hm5hG9qYe8/KOsFEvq8tewCgfEAyPNiZQOTVfaNJewlM7NB5hiox0tf8L+3zYHt+CeTE=
+  bucket: jonathanmp.me
+  local-dir: build
+  acl: ''
+  on:
+    repo: jonathanp727/portfolio-react
