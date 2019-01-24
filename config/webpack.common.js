@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const ROOT_DIR = path.resolve(__dirname);
+const ROOT_DIR = path.resolve(__dirname, '..');
 
 const APP_DIR = path.resolve(ROOT_DIR, 'src');
 const PUBLIC_DIR = path.resolve(ROOT_DIR, 'public');
@@ -46,8 +46,4 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
-  devServer: {
-    contentBase: './dist',
-    hot: true,
-  }
 };
