@@ -14,7 +14,7 @@ import JishoHistoryContent from './scenes/JishoHistory/content';
 import JishoHistoryInfo from './scenes/JishoHistory/info';
 import FlashcardsContent from './scenes/Flashcards/content';
 import FlashcardsInfo from './scenes/Flashcards/info';
-import NotFound from './scenes/Notfound';
+import NotFound from './scenes/NotFound';
 
 import IntroductionBackground from './assets/backgrounds/introduction.jpg';
 import JishoHistoryBackground from './assets/backgrounds/jishohistory.jpg';

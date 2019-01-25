@@ -1,1 +1,18 @@
 language: node_js
+node_js:
+- node
+git:
+  depth: false
+script:
+- npm run build
+deploy:
+  skip_cleanup: true
+  provider: s3
+  access_key_id: AKIAIB4DVUDUJQM4M3OA
+  secret_access_key:
+    secure: "ZVoc9++PxWcb9J8nX453tupAjep2FIweA38/aJe2hv+MaA/IRc0ekOxG+/eLe6k7WoR8f4IZ48at7vzmnx6sdjeFCnZsKuDU0k1dGRkqnsHXlT/z8Q6DH+/82YnLCux3RHtj+Svv23hai957bq0C7XvTh3OoQDuIKF+VF4xpT+Xpkpi/LrTTzE0KMM4pU8ZJwScVz3aJGW0kvnDTUP4+PTpCdRTNAgBJ8idmnVyiegVsis8Jf/uifAnHidCV4iZxQpdKV2xrtPelHc/mhk79tcEexOG799g9mzboLmVmRNmNBu8In+JwUkdBywuvVcxErhQMM86sWiukc3yPlbv6KDPt0K0GIy+AYr2zgwMns7YklTp4ESIosoloGROve0OSjXGWMZHx/cBJTPav0YOmOlpiEGvwKMNJmyt4EfU8z30CnJtgcMwv7UTkBvbgpxeFlS/RuVzIXVCDldcwboUT4IkRmiD5Omz5DC8VmCer1CmNQYqY/EB5KgELyeQRIHy7QTXhm32Dz3G/CmQEv5KUR6b+ht2+1QH6XZgAqOQIKHOJCsRsB4Q8IxmzkCHDfTOmmuLiNRmGwxwE/4dKAYiSPKMyyAiIS3QMy82kIl5Z4SpsOh56kwj6GL+v41RhFDwYXGWENVMmRa/NPc1V8sj/rP3WFwLkTh9YdhFUXt64V4U="
+  bucket: jonathanmp.me
+  region: us-east-2
+  local-dir: dist
+  on:
+    repo: jonathanp727/portfolio-react
