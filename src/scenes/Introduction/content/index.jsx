@@ -96,22 +96,6 @@ class IntroductionContent extends React.Component {
               </Transition>
             }
           </div>
-          {
-            nameDone && isFirefox &&
-            <Transition
-              native
-              config={config.fast}
-              from={{ opacity: 0, position: 'absolute', overflow: 'hidden', height: 0 }}
-              enter={[{ opacity: 1, height: 'auto', padding: '8px' }]}
-              leave={{ height: 0 }}
-            >
-              {
-                show => style => (
-                  <animated.div className="warning" style={style}>Firefox support undergoing development</animated.div>
-                )
-              }
-            </Transition>
-          }
         </div>
       </div>
     );
