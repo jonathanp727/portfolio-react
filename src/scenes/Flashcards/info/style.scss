@@ -1,7 +1,21 @@
+@import '../../../styles/variables.scss';
+
 .flashcards-info {
+
+  @media (max-width: $mobile-max) {
+    font-size: 40px;
+    padding: 50px 40px;
+    box-sizing: border-box;
+  }
+
   p {
     line-height: 1.2em;
     font-size: 15px;
+
+    @media (max-width: $mobile-max) {
+      font-size: 40px;
+    }
+
   }
 
   a {

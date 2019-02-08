@@ -1,5 +1,12 @@
+@import '../../../styles/variables.scss';
+
 .portfolio-info {
   line-height: 1.2em;
+
+  @media (max-width: $mobile-max) {
+    font-size: 40px;
+    padding: 50px 40px;
+  }
 
   a {
     display: block;

@@ -22,7 +22,7 @@
 
       @media only screen and (max-width: $mobile-max) {
         margin-left: 0;
-        font-size: 35px;
+        font-size: 90px;
       }
     }
   }
@@ -51,8 +51,8 @@
       cursor: pointer;
 
       @media only screen and (max-width: $mobile-max) {
-        width: 170px;
-        height: 90px;
+        width: 600px;
+        height: 300px;
       }
 
       span {

@@ -1,9 +1,17 @@
+@import '../../../styles/variables.scss';
+
 .hackillinois-info {
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+
+  @media (max-width: $mobile-max) {
+    font-size: 40px;
+    padding: 50px 40px;
+    box-sizing: border-box;
+  }
 
   .desc, .desc-2 {
     line-height: 1.2em;

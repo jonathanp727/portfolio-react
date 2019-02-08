@@ -22,6 +22,7 @@
 
       @media only screen and (max-width: $mobile-max) {
         margin-left: 0;
+        font-size: 100px;
       }
     }
   }
@@ -34,12 +35,23 @@
     width: 90%;
     height: 100%;
 
+    @media only screen and (max-width: $mobile-max) {
+      flex-wrap: wrap;
+      justify-content: center;
+      padding-top: 15%;
+      box-sizing: border-box;
+    }
+
     .chart {
       width: 45%;
-
+      @media only screen and (max-width: $mobile-max) {
+        width: 80%;
+      }
       p {
-        font-family: 'Raleway', serif;
         margin-top: 25px;
+        @media only screen and (max-width: $mobile-max) {
+          font-size: 30px;
+        }
       }
     }
   }
