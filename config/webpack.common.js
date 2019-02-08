@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 
@@ -46,6 +47,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new CopyWebpackPlugin([{ from: 'src/public_assets', to: 'assets' }]),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       inject: true,

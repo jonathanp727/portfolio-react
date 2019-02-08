@@ -10,6 +10,7 @@ const Slide = ({ style, image, index, prev, next, children }) => {
   if (image) {
     backgroundImage = `url(${image})`;
   }
+  
   return (
     <animated.div className="slide" style={{ ...style, backgroundImage, zIndex: 10 + index }}>
       <div className="arrow-cont">

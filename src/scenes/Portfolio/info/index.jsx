@@ -8,7 +8,7 @@ const Info = ({ style }) => (
       My most recent projects.  Unless otherwise stated, they were
       done on my own and outside of class.
     </p>
-    <a href="http://jonathanmp.me/JonathanPhipps.pdf" target="_blank">View resume</a>
+    <a href="/assets/JonathanPhipps.pdf" target="_blank">View resume</a>
   </div>
 );
 

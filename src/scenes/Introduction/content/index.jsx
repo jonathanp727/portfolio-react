@@ -46,7 +46,7 @@ class IntroductionContent extends React.Component {
   render() {
     const { hiDone, isFirefox, nameDone } = this.state;
     const { resting, onRest, visited } = this.props;
-
+    
     return (
       <div className="introduction-content">
         <div className="text-cont">

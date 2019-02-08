@@ -12,6 +12,8 @@ import HackIllinoisContent from './scenes/HackIllinois/content';
 import HackIllinoisInfo from './scenes/HackIllinois/info';
 import JishoHistoryContent from './scenes/JishoHistory/content';
 import JishoHistoryInfo from './scenes/JishoHistory/info';
+import TheHarvestContent from './scenes/TheHarvest/content';
+import TheHarvestInfo from './scenes/TheHarvest/info';
 import FlashcardsContent from './scenes/Flashcards/content';
 import FlashcardsInfo from './scenes/Flashcards/info';
 import NotFound from './scenes/NotFound';
@@ -30,6 +32,7 @@ const routes = {
   portfolio: '/portfolio',
   hackIllinois: '/portfolio/Hack Illinois',
   jishoHistory: '/portfolio/Jisho History',
+  theHarvest: '/portfolio/The Harvest',
   flashcards: '/portfolio/Flashcards',
   notFound: '/404',
 };
@@ -46,9 +49,11 @@ const mapRouteToComponents = (pathname) => {
     case routes.hackIllinois:
       return { Content: HackIllinoisContent, Info: HackIllinoisInfo, image: null, prev: routes.portfolio, next: routes.jishoHistory };
     case routes.jishoHistory:
-      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: JishoHistoryBackground, prev: routes.hackIllinois, next: routes.flashcards };
+      return { Content: JishoHistoryContent, Info: JishoHistoryInfo, image: JishoHistoryBackground, prev: routes.hackIllinois, next: routes.theHarvest };
+    case routes.theHarvest:
+      return { Content: TheHarvestContent, Info: TheHarvestInfo, image: null, prev: routes.jishoHistory, next: routes.flashcards, }
     case routes.flashcards:
-      return { Content: FlashcardsContent, Info: FlashcardsInfo, image: null, prev: routes.jishoHistory, next: null}
+      return { Content: FlashcardsContent, Info: FlashcardsInfo, image: null, prev: routes.theHarvest, next: null}
     default:
       return null;
   }
@@ -60,7 +65,8 @@ const order = {
   [routes.portfolio]: 1,
   [routes.hackIllinois]: 2,
   [routes.jishoHistory]: 3,
-  [routes.flashcards]: 4,
+  [routes.theHarvest]: 4,
+  [routes.flashcards]: 5,
   [routes.notFound]: -1,
 }
 
@@ -93,6 +99,11 @@ class App extends React.Component {
   // Callback called by intro content when animation is finished in order to render info later on
   onIntroRest() {
     this.setState({ introAnimationFinished: true });
+    // Preload all other images upon animation completion
+    const img1 = new Image();
+    img1.src = JishoHistoryBackground;
+    const img2 = new Image();
+    img2.src = PortfolioBackground;
   }
 
   render() {
