@@ -35,7 +35,7 @@ class FlashcardsContent extends React.Component {
     return (
       <div className="flashcards-content">
         <div className="title-cont">
-          <h1>Japanese Flashcards</h1>
+          <h1>Japanese Flashcards (2017)</h1>
         </div>
         <div className="flashcards-cont">
           { resting && 
